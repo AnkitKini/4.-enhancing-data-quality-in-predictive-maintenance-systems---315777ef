@@ -6,12 +6,8 @@ from tensorflow.keras.optimizers import Adam
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 
-# Assume X_clean is available from training (same 17 features)
-# If not, load and prepare it the same way you did during training.
-
-# -----------------------
 # 1. RELOAD TRAINING DATA IF NECESSARY
-# -----------------------
+
 import pandas as pd
 
 # Load NASA training data
@@ -53,9 +49,8 @@ clean_mask = iso.fit_predict(X_scaled) == 1
 X_clean = X_scaled[clean_mask]
 y_clean = df_train['RUL'][clean_mask].values
 
-# -----------------------
 # 2. CREATE TEST SEQUENCES
-# -----------------------
+
 def create_sequences(data, labels, seq_length=20):
     xs, ys = [], []
     for i in range(len(data) - seq_length):
@@ -65,21 +60,18 @@ def create_sequences(data, labels, seq_length=20):
 
 X_test_seq, y_test_seq = create_sequences(X_clean[:1020], y_clean[:1020], seq_length=20)
 
-# -----------------------
 # 3. LOAD MODEL
-# -----------------------
+
 model = load_model("/content/sample_data/predictive_maintenance_lstm_model.h5", compile=False)
 model.compile(optimizer=Adam(), loss=MeanSquaredError(), metrics=[MeanAbsoluteError()])
 print("Model loaded and recompiled.")
 
-# -----------------------
 # 4. PREDICT
-# -----------------------
+
 y_pred = model.predict(X_test_seq)
 
-# -----------------------
 # 5. EVALUATE
-# -----------------------
+
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 rmse = np.sqrt(mean_squared_error(y_test_seq, y_pred))
@@ -88,7 +80,7 @@ mae = mean_absolute_error(y_test_seq, y_pred)
 print(f"📊 RMSE: {rmse:.2f}")
 print(f"📊 MAE : {mae:.2f}")
 
-# Plot
+
 plt.plot(y_pred, label='Predicted')
 plt.plot(y_test_seq, label='Actual')
 plt.legend()
