@@ -36,6 +36,7 @@ df_train = pd.read_csv("/content/sample_data/train_FD001.txt", sep="\s+", header
 df_train.dropna(axis=1, how='all', inplace=True)
 df_train.columns = column_names
 
+
 # Validation dataset
 df_val = pd.read_csv("/content/sample_data/predictive_maintenance.csv")
 
