@@ -67,6 +67,5 @@ This project is a complete pipeline for predictive maintenance using a Long Shor
 ├── predictive_maintenance.csv      # Validation/test dataset
 ├── predictive_maintenance_lstm_model.h5  # Trained LSTM model
 ├── app.py                          # Flask app script
-├── test_input.csv                  # Sample input for testing
 └── README.md                       # Project documentation
 ```
