@@ -59,10 +59,6 @@ train_features = [
     'sensor_13', 'sensor_14', 'sensor_15', 'sensor_17', 'sensor_20', 'sensor_21'
 ]
 
-# IMPORTANT: Validation must use same features as training for consistent input size
-# If df_val doesn't have these columns, you need to process accordingly.
-# For demonstration, we use only df_train here for both train and val split.
-
 # Normalize with a single scaler (fit on train, transform on val)
 scaler = MinMaxScaler()
 train_scaled = scaler.fit_transform(df_train[train_features])
