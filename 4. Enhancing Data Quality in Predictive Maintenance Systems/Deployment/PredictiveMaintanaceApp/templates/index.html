@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predictive Maintenance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Predictive Maintenance RUL Estimator</h2>
+        <form action="/predict" method="post">
+            {% for feature in ['Air temperature [K]', 'Process temperature [K]', 'Rotational speed [rpm]', 'Torque [Nm]', 'Tool wear [min]'] %}
+                <label>{{ feature }}</label><br>
+                <input type="number" step="any" name="{{ feature }}" required><br><br>
+            {% endfor %}
+            <input type="submit" value="Predict RUL">
+        </form>
+        <h3>{{ prediction_text }}</h3>
+    </div>
+</body>
+</html>
